@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>O-Dap Sign In/Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Staatliches">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        h2 {
+            font-family: "Staatliches", sans-serif;
+        }
+    </style>
+
+    <script>
+        function signClick(){
+            console.log("TEST");
+            event.preventDefault();
+            var js_org = {
+                id : document.getElementById('id').value,
+                passwd : document.getElementById('passwd').value
+            }
+            const json = JSON.stringify(js_org);
+            console.log(json);
+            $.ajax({
+                type: 'POST',
+                url: '/Signup',
+                dataType: 'json',
+                data: json,
+                contentType: 'application/json',
+                success: function(data) {
+                alert(data)
+                }
+            });
+        }
+
+        function logClick(){
+            console.log("TEST");
+            event.preventDefault();
+            var js_org = {
+                id : document.getElementById('id').value,
+                passwd : document.getElementById('passwd').value
+            }
+            const json = JSON.stringify(js_org);
+            console.log(json);
+            $.ajax({
+                type: 'POST',
+                url: '/Login',
+                dataType: 'json',
+                data: json,
+                contentType: 'application/json',
+                success: function(data) {
+                alert(data)
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <section class="hero section is-info is-medium">
+        <div class="container">
+            <h1 class="title">O-DAP</h1>
+            <h2 class="subtitle">Postechian Homework Service</h2>
+        </div>
+    </section>
+
+    <div style="height:20px;"></div>
+    
+    <div class="columns is-centered">
+        <div class="column is-one-quarter"></div>
+        <div class="column is-half">
+            <div class="field">
+                <label class="label">ID</label>
+                <div class="control">
+                  <input class="input" placeholder="ID" id="id">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                  <input class="input" placeholder="Password" id="passwd">
+                </div>
+              </div>
+        </div>
+        <div class="column is-one-quarter"></div>
+    </div>
+
+    <div class="columns is-centered">
+        <div class="column is-one-quarter"></div>
+        <div class="column is-half has-text-centered">
+            <button class="button is-success" id="loginBut" onclick="logClick();">Login</button>
+            <button class="button is-info" id="signUpBut" onclick="signClick();">Sign Up</button>
+        </div>
+        <div class="column is-one-quarter"></div>
+    </div>
+</body>
+
+</html>

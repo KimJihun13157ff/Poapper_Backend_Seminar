@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>O-Dap Main Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Staatliches">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        #title_div {
+            font-family: "Staatliches", sans-serif;
+        }
+
+        #answered_hw {
+            /*background-color: #71DFE7;*/
+            background-color: hsl(204, 60%, 71%);
+        }
+
+        #answered_hw:hover {
+            /*background-color: #C2FFF9;*/
+            background-color: hsl(204, 60%, 86%);
+        }
+
+        #buffer_div {
+            height:5px;
+        }
+    </style>
+
+    <script>
+        function hwClick(num){
+            console.log("TEST");
+            event.preventDefault();
+            var json_org = {
+                subject : document.getElementById('subject' + num.toString()).textContent,
+                assign : document.getElementById('assign' + num.toString()).textContent
+            }
+            const json = JSON.stringify(json_org);
+            console.log(json);
+            $.ajax({
+              type: 'POST',
+              url: '/HW' + num.toString(),
+              dataType: 'json',
+              data: json,
+              contentType: 'application/json',
+              success: function(data){
+                alert(data)
+              }
+            });
+        }
+
+        function hwClicked(num){
+            console.log("TEST");
+            event.preventDefault();
+
+            var subject = document.getElementById('subject' + num.toString()).textContent;
+            var assign = document.getElementById('assign' + num.toString()).textContent;
+
+            location.href = "/HW" + "/" + subject + "/" + assign;
+        }
+    </script>
+</head>
+
+<body>
+    <section class="hero is-info">
+        <div class="container">
+            <h1 class="title">O-DAP</h1>
+            <h2 class="subtitle" id="title_div">Postechian Homework Service</h2>
+        </div>
+    </section>
+
+    <div style="height: 30px;"></div>
+
+    <div class="columns is-centered is-vcentered">
+        <div class="column is-2 has-text-centered">
+            <button class="button is-primary is-rounded" onclick="location.href='/make_new_post';">Upload</button>
+        </div>
+        <div class="column is-8 box" id="answered_hw" onclick="hwClicked(1);">
+            <h1 class="title" id="subject1">PHYS102</h1> <h1 class="title" id="assign1">Homework 10</h1>
+            <h2 class="subtitle">Entered Answers: 2</h2>
+        </div>
+        <div class="column is-2"></div>
+    </div>
+
+    <div class="columns is-centered">
+        <div class="column is-2"></div>
+        <div class="column is-8 box" id="answered_hw" onclick="hwClicked(2)">
+            <h1 class="title" id="subject2">MATH101</h1>  <h1 class="title" id="assign2">Weekly HW 8</h1>
+            <h2 class="subtitle">Entered Answers: 1</h2>
+        </div>
+        <div class="column is-2"></div>
+    </div>
+
+    <div class="columns is-centered">
+        <div class="column is-2"></div>
+        <div class="column is-8 box" id="answered_hw" onclick="hwClicked(3)">
+            <h1 class="title" id="subject3">CSED232</h1>  <h1 class="title" id="assign3">Assignment 3</h1>
+            <h2 class="subtitle">Entered Answers: 5</h2>
+        </div>
+        <div class="column is-2"></div>
+    </div>
+
+    <div class="columns is-centered">
+        <div class="column is-2"></div>
+        <div class="column is-8 box" id="answered_hw" onclick="hwClicked(4)">
+            <h1 class="title" id="subject4">LIFE204</h1>  <h1 class="title" id="assign4">Final Report</h1>
+            <h2 class="subtitle">Entered Answers: 2</h2>
+        </div>
+        <div class="column is-2"></div>
+    </div>
+</body>
+
+</html>
